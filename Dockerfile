@@ -52,7 +52,8 @@ RUN yum install -y curl wget java-headless bzip2 gnupg2 sqlite3 \
     && conda remove --quiet --yes --force --feature mkl ; conda clean -tipsy
 
 RUN tar -xvf spark-2.4.6-bin-hadoop2.7.tgz
-RUN mv spark-2.4.6-bin-hadoop2.7 /opt
+RUN mkdir /spark-2.4.6
+RUN mv /tmp/spark-2.4.6-bin-hadoop2.7 /spark-2.4.6
 
 ENV PATH /opt/conda/bin:$PATH
 

@@ -1,4 +1,5 @@
 FROM radanalyticsio/base-notebook
+RUN apt-get install wget
 RUN wget http://www.trieuvan.com/apache/spark/spark-2.4.6/spark-2.4.6-bin-hadoop2.7.tgz
 RUN tar -xvf spark-2.4.6-bin-hadoop2.7.tgz
 ENV SPARK_HOME /notebooks/spark-2.4.6-bin-hadoop2.7

@@ -51,6 +51,8 @@ RUN yum install -y curl wget java-headless bzip2 gnupg2 sqlite3 \
     && conda remove --quiet --yes --force qt pyqt \
     && conda remove --quiet --yes --force --feature mkl ; conda clean -tipsy
 
+RUN tar -xvf spark-2.4.6-bin-hadoop2.7.tgz
+RUN mv /tmp/spark-2.4.6-bin-hadoop2.7 /opt
 
 ENV PATH /opt/conda/bin:$PATH
 
@@ -59,7 +61,6 @@ ENV SPARK_HOME /opt/spark
 # Add a notebook profile.
 
 RUN mkdir /notebooks && chown $NB_UID:root /notebooks && chmod 1777 /notebooks
-RUN tar -xvf spark-2.4.6-bin-hadoop2.7.tgz
 
 EXPOSE 8888
 

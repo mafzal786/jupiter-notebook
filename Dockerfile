@@ -1,3 +1,5 @@
+# (ideally) minimal pyspark/jupyter notebook
+
 FROM radanalyticsio/openshift-spark:2.2-latest
 
 USER root
@@ -20,7 +22,6 @@ RUN yum install -y curl wget java-headless bzip2 gnupg2 sqlite3 \
     && yum clean all -y \
     && cd /tmp \
     && wget -q https://repo.continuum.io/miniconda/Miniconda3-4.2.12-Linux-x86_64.sh \
-    && wget wget http://www.trieuvan.com/apache/spark/spark-2.4.6/spark-2.4.6-bin-hadoop2.7.tgz \
     && echo d0c7c71cc5659e54ab51f2005a8d96f3 Miniconda3-4.2.12-Linux-x86_64.sh | md5sum -c - \
     && bash Miniconda3-4.2.12-Linux-x86_64.sh -b -p $CONDA_DIR \
     && rm Miniconda3-4.2.12-Linux-x86_64.sh \
@@ -51,9 +52,6 @@ RUN yum install -y curl wget java-headless bzip2 gnupg2 sqlite3 \
     && conda remove --quiet --yes --force qt pyqt \
     && conda remove --quiet --yes --force --feature mkl ; conda clean -tipsy
 
-RUN tar -xvf spark-2.4.6-bin-hadoop2.7.tgz
-#RUN mkdir /spark-2.4.6
-#RUN mv /tmp/spark-2.4.6-bin-hadoop2.7 /spark-2.4.6
 
 ENV PATH /opt/conda/bin:$PATH
 
@@ -91,8 +89,3 @@ WORKDIR /notebooks
 ENTRYPOINT ["/tini", "--"]
 
 CMD ["/entrypoint", "/start.sh"]
-
-
-
-
-
